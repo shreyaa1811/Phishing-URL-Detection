@@ -156,8 +156,8 @@ Always verify suspicious URLs independently and follow cybersecurity best practi
 ---
 
 ### 👨‍💻 Author
-Made by Shreyaa Murali
-📧 f20230300@dubai.bits-pilani.ac.in
+Made by Shreyaa Murali  
+📧 f20230300@dubai.bits-pilani.ac.in  
 🐙 GitHub: @shreyaa1811
 
 ---
