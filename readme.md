@@ -1,5 +1,6 @@
 # 🛡️ Phishing URL Detector  
 **A real-time phishing URL scanner powered by Machine Learning and Intelligent rule-based analysis.**
+
 ---
 
 ### 🔥 What It Does
@@ -13,8 +14,25 @@ Detects malicious URLs using:
 ---
 
 ### ⚙️ How It Works
+1. User inputs a URL into the app.
 
-#### ⚒️ Feature Engineering  
+2. The app extracts multiple features from the URL like length, number of digits, etc.
+
+3. These features are passed to a pre-trained Random Forest model that predicts whether the URL is safe or phishing.
+
+4. The model’s output is then refined by rule-based checks including:
+
+    - Typo-squatting detection (e.g., g00gle.com)
+
+    - Whitelist matching for known safe domains (e.g., google.com)
+
+    - Suspicious substring patterns (e.g., login-, secure-)
+
+5. The final verdict (phishing or legitimate) is displayed alongside detailed feature info and explanations.
+
+---
+
+### ⚒️ Feature Engineering  
 We extract structural features from each URL:
 - ✅ HTTPS present?
 - 🔢 Number of digits
@@ -23,20 +41,34 @@ We extract structural features from each URL:
 - 📁 Path depth and length
 - 📏 Overall URL length
 
-#### 🤖 ML Model (Random Forest Classifier)
-- Trained on **200K+** labeled URLs  
-- Accuracy: **99%**, F1-score: **0.99**
-- Model input: 11 engineered features (see below)
+---
 
-#### 🧩 Post-Processing Rules
-After the model prediction, a rule-based engine may override based on:
-- **Typo-squatting:** `amaz0n.com`, `faceb00k.net`, etc.
-- **Known-brand safelist:** real domains like `google.com`, `apple.com`
-- **Suspicious substrings:** `login-`, `secure-`, `verify-`, etc.
+### 🤖 ML Model Performance
+The phishing URL detection system is powered by a **Random Forest Classifier** trained on a labeled dataset of legitimate and phishing URLs. The model demonstrates **high accuracy and generalization**, making it well-suited for real-world deployment.
+
+🔍 Metrics Overview
+
+| Metric              | Score     |
+|---------------------|-----------|
+| Training Accuracy   | 99.59%    |
+| Test Accuracy       | 99.55%    |
+| Overall Accuracy    | 99.55%    |
+
+---
+
+### 🛡️ Additional Heuristic Checks
+
+Beyond machine learning predictions, the app also performs real-time **heuristic analysis** to catch phishing attempts that might evade standard classifiers:
+
+- 🔤 **Typosquatting detection :** `amaz0n.com`, `faceb00k.net`, etc.
+- 🔗 **Suspicious character patterns :** `login-`, `secure-`, `verify-`, etc.
+- 🌐 **Known-domain safelist :** real domains like `google.com`, `apple.com`
 
 ---
 
 ### 🎯 Feature List
+
+The following features were extracted from the urls present in the dataset in order to accurately train the model :
 
 | Feature | Description |
 |--------|-------------|
@@ -77,6 +109,9 @@ C --> D{Post-Processing Rules}
 D --> E[Final Prediction]
 
 ```
+
+---
+
 ### 🖥️ Local Setup
 1. Clone the repo
 ```bash
@@ -93,6 +128,9 @@ pip install -r requirements.txt
 ```
 streamlit run app.py
 ```
+
+---
+
 ### 🗂 Project Structure
 ```
 phishing-url-detector/
@@ -102,17 +140,25 @@ phishing-url-detector/
 ├── requirements.txt       # Python dependencies
 └── README.md              # This documentation
 ```
-### 🖼️ Demo Screenshots 
+
+---
 
 ### 📬 Credits & Acknowledgements
 Dataset sourced from [Phishing Websites Dataset on Kaggle](https://www.kaggle.com/datasets/marryjanety/phishing-url-dataset-url-and-label)
   – thanks to the contributors!
 
+---
+
 ### 🙈 Disclaimer
 This project is for educational and research purposes only.
 Always verify suspicious URLs independently and follow cybersecurity best practices.
+
+---
 
 ### 👨‍💻 Author
 Made by Shreyaa Murali
 📧 f20230300@dubai.bits-pilani.ac.in
 🐙 GitHub: @shreyaa1811
+
+---
+
