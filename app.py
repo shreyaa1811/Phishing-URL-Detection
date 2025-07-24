@@ -126,6 +126,8 @@ suspicious_patterns = ['secure-', 'account-', 'login-', 'verify-', 'update-', 's
 #Streamlit app UI
 st.set_page_config(page_title="Phishing URL Detector", layout="centered")
 
+
+
 st.title("🔍 Phishing URL Detector")
 st.markdown("Enter a URL to check if it's **phishing** or **legitimate**.")
 
