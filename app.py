@@ -65,7 +65,6 @@ def is_typo_squatting(domain,known_domains,threshold=0.8) :
     kd = kd.lower().strip()
     kd_name = kd.split('.')[0]
     ratio = SequenceMatcher(None,domain,kd).ratio()
-    print(f"Comparing '{domain}' with '{kd}', ratio: {ratio}") 
     if ratio > threshold and domain!=kd :
       if domain_name == kd_name:
          continue
@@ -75,8 +74,6 @@ def is_typo_squatting(domain,known_domains,threshold=0.8) :
 
 #Conditions based on rule based overriding
 def after_prediction(domain,ml_prediction,known_domains,suspicious_patterns) :
-  print(f"Domain: '{domain}'")
-  print(f"Is typo squatting? {is_typo_squatting(domain, known_domains)}")
 
   #If ML model returns safe but there is some kind of spelling mishap it will be checked through this
   if ml_prediction == 0 and is_typo_squatting(domain,known_domains) :
@@ -148,10 +145,8 @@ if st.button("Check URL") :
             domain = urlparse(url).netloc.lower()
             if domain.startswith("www."):
               domain = domain[4:]  # strip www.
-            st.write(f"🔍 Domain seen by rule checker: {domain}")
             X_input = extract_features_from_url(url)
             ml_pred = model.predict(X_input)[0]
-            st.write(f"ML model prediction: {ml_pred}")
             final = after_prediction(domain, ml_pred, known_domains, suspicious_patterns)
 
             if final == 1:
